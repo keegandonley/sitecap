@@ -1,0 +1,19 @@
+{
+  "name": "sitecap",
+  "repo": "https://github.com/keegandonley/sitecap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "sitecap": "index.js"
+  },
+  "author": "Keegan Donley",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.16.0",
+    "puppeteer": "^1.6.1"
+  }
+}
