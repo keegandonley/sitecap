@@ -3,7 +3,10 @@
 
 ## SiteCap
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
-
+<br />
+[![npm version](https://badge.fury.io/js/sitecap.svg)](https://badge.fury.io/js/sitecap)
+[![license](https://img.shields.io/npm/l/sitecap.svg)](https://img.shields.io/npm/l/sitecap.svg)
+[![issues](https://img.shields.io/github/issues/keegandonley/sitecap.svg)](https://img.shields.io/github/issues/keegandonley/sitecap.svg)
 </div>
 
 Simple CLI for capturing screenshots of websites in a straightforward and repeatable way.
