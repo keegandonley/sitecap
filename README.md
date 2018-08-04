@@ -16,23 +16,30 @@ npm install -g sitecap
 
 ### Usage
 ```
-  Usage: sitecap [options]
-
   Options:
 
     -V, --version          output the version number
     -s, --site <site>      The website to capture
-    -w, --width <width>    The viewport width
-    -h, --height <height>  The viewport height
+    -W, --width <width>    The viewport width
+    -H, --height <height>  The viewport height
     -o, --output <output>  The output file name
     -r, --retina           Render in retina resolution
+    -i, --interactive      Open an interactive browser before saving
+    -v, --verbose          Turn on verbose output
     -h, --help             output usage information
 ```
-Basic uage: 
+**Basic usage:**
 ```
 sitecap --site https://keegandonley.com
 ```
-Dimensions:
+**Dimensions:**
 ```
 sitecap --site https://keegandonley.com --width 1000 --height 300
+```
+
+**Interactive:**
+
+Launch the browser and interact with the site before capturing the screenshot
+```
+sitecap --site https://keegandonley.com --interactive
 ```
