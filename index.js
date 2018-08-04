@@ -32,23 +32,23 @@ function askQuestion(q) {
 
 async function runProcess(website, output) {
 	try {
-			const b = await puppeteer.launch({ headless: !program.interactive });
-			const p = await b.newPage();
-			p.setViewport({
-				width: parseInt(program.width) || 800,
-				height: parseInt(program.height) || 600,
-				deviceScaleFactor: program.retina ? 2 : 1,
-			});
-			log('loading site');
-			await p.goto(website);
-			await askQuestion('Interact with the site, and press enter to continue when ready');
-			log('taking screenshot');
-			await p.screenshot({ path: output });
-			log(`screenshot saved as ${output}`);
-			await b.close();
+		const b = await puppeteer.launch({ headless: !program.interactive });
+		const p = await b.newPage();
+		p.setViewport({
+			width: parseInt(program.width) || 800,
+			height: parseInt(program.height) || 600,
+			deviceScaleFactor: program.retina ? 2 : 1,
+		});
+		log('loading site');
+		await p.goto(website);
+		await askQuestion('Interact with the site, and press enter to continue when ready');
+		log('taking screenshot');
+		await p.screenshot({ path: output });
+		log(`screenshot saved as ${output}`);
+		await b.close();
 	} catch (e) {
-			console.log(e);
-			return;
+		console.log(e);
+		return;
 	}
 }
 
