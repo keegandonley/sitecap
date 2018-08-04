@@ -1,7 +1,7 @@
 {
   "name": "sitecap",
   "repo": "https://github.com/keegandonley/sitecap",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
