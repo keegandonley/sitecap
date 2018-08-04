@@ -2,7 +2,7 @@
 const program = require('commander');
 const puppeteer = require('puppeteer');
 const readline = require('readline');
-const package = require('./package.json');
+const npackage = require('../package.json');
 
 function log(message) {
 	if (program.verbose) {
@@ -12,7 +12,7 @@ function log(message) {
 
 function askQuestion(q) {
 	if (!program.interactive) {
-		return;
+		return 0;
 	}
 	const rl = readline.createInterface({
 		input: process.stdin,
@@ -23,7 +23,7 @@ function askQuestion(q) {
 			rl.question(q, (answer) => {
 				rl.close();
 				resolve(answer);
-			})
+			});
 		} catch (e) {
 			reject();
 		}
@@ -35,8 +35,8 @@ async function runProcess(website, output) {
 		const b = await puppeteer.launch({ headless: !program.interactive });
 		const p = await b.newPage();
 		p.setViewport({
-			width: parseInt(program.width) || 800,
-			height: parseInt(program.height) || 600,
+			width: parseInt(program.width, 10) || 800,
+			height: parseInt(program.height, 10) || 600,
 			deviceScaleFactor: program.retina ? 2 : 1,
 		});
 		log('loading site');
@@ -48,12 +48,12 @@ async function runProcess(website, output) {
 		await b.close();
 	} catch (e) {
 		console.log(e);
-		return;
+		process.exit(1);
 	}
 }
 
 program
-	.version(package.version)
+	.version(npackage.version)
 	.option('-s, --site <site>', 'The website to capture')
 	.option('-W, --width <width>', 'The viewport width')
 	.option('-H, --height <height>', 'The viewport height')
@@ -65,12 +65,12 @@ program
 
 if (!program.site) {
 	console.log('No site was provided');
-	return 1;
+	process.exit(1);
 }
 
 if (typeof program.width !== typeof program.height) {
 	console.log('Either no dimensions or both a width and height are required');
-	return 1;
+	process.exit(1);
 }
 
 runProcess(program.site, program.output || 'out.png');
