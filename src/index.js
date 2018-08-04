@@ -10,8 +10,8 @@ function log(message) {
 	}
 }
 
-function askQuestion(q) {
-	if (!program.interactive) {
+function askQuestion(q, override) {
+	if (!program.interactive && !override) {
 		return 0;
 	}
 	const rl = readline.createInterface({
@@ -30,8 +30,20 @@ function askQuestion(q) {
 	});
 }
 
-async function runProcess(website, output) {
+async function verifySite() {
+	if (!program.site) {
+		const site = await askQuestion('Please enter a site URL to continue: ', true);
+		if (!site) {
+			process.exit(1);
+		}
+		return site;
+	}
+	return program.site;
+}
+
+async function runProcess(output) {
 	try {
+		const site = await verifySite();
 		const b = await puppeteer.launch({ headless: !program.interactive });
 		const p = await b.newPage();
 		p.setViewport({
@@ -40,7 +52,7 @@ async function runProcess(website, output) {
 			deviceScaleFactor: program.retina ? 2 : 1,
 		});
 		log('loading site');
-		await p.goto(website);
+		await p.goto(site);
 		await askQuestion('Interact with the site, and press enter to continue when ready');
 		log('taking screenshot');
 		await p.screenshot({ path: output });
@@ -63,14 +75,9 @@ program
 	.option('-v, --verbose', 'Turn on verbose output')
 	.parse(process.argv);
 
-if (!program.site) {
-	console.log('No site was provided');
-	process.exit(1);
-}
-
 if (typeof program.width !== typeof program.height) {
 	console.log('Either no dimensions or both a width and height are required');
 	process.exit(1);
 }
 
-runProcess(program.site, program.output || 'out.png');
+runProcess(program.output || 'out.png');
