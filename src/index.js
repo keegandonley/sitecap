@@ -53,6 +53,7 @@ async function runProcess(output) {
 		});
 		log('loading site');
 		await p.goto(site);
+		log('finished loading');
 		await askQuestion('Interact with the site, and press enter to continue when ready');
 		log('taking screenshot');
 		await p.screenshot({ path: output });
