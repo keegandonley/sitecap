@@ -29,6 +29,7 @@ npm install -g sitecap
     -r, --retina           Render in retina resolution
     -i, --interactive      Open an interactive browser before saving
     -v, --verbose          Turn on verbose output
+    -p, --pdf              Output as a pdf file
     -h, --help             output usage information
 ```
 **Basic usage:**

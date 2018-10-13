@@ -55,8 +55,15 @@ async function runProcess(output) {
 		await p.goto(site);
 		log('finished loading');
 		await askQuestion('Interact with the site, and press enter to continue when ready');
-		log('taking screenshot');
-		await p.screenshot({ path: output });
+		if (program.pdf) {
+			// Create a PDF
+			log('creating PDF');
+			await p.pdf({ path: output, format: 'letter' });
+		} else {
+			// Create a screenshot
+			log('taking screenshot');
+			await p.screenshot({ path: output });
+		}
 		log(`screenshot saved as ${output}`);
 		await b.close();
 	} catch (e) {
@@ -74,6 +81,7 @@ program
 	.option('-r, --retina', 'Render in retina resolution')
 	.option('-i, --interactive', 'Open an interactive browser before saving')
 	.option('-v, --verbose', 'Turn on verbose output')
+	.option('-p, --pdf', 'Output as a pdf file')
 	.parse(process.argv);
 
 if (typeof program.width !== typeof program.height) {
@@ -81,4 +89,4 @@ if (typeof program.width !== typeof program.height) {
 	process.exit(1);
 }
 
-runProcess(program.output || 'out.png');
+runProcess(program.output || program.pdf ? 'out.pdf' : 'out.png');
