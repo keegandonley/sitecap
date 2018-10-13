@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/keegandonley/sitecap"
   },
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,12 +17,12 @@
   "author": "Keegan Donley",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.16.0",
-    "puppeteer": "^1.6.1"
+    "commander": "^2.19.0",
+    "puppeteer": "^1.9.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0"
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }
